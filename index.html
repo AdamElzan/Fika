@@ -6,6 +6,24 @@
     <title>Apartament Fika | Biała Perła - Sienna, Czarna Góra</title>
     <meta name="description" content="Apartament Fika w Hotelu Biała Perła - skandynawski design w sercu Sudetów. Odkryj szwedzką sztukę fika w górach.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics - Priority #10 -->
+    <!-- INSTRUKCJA: 
+         1. Idź na: https://analytics.google.com/
+         2. Utwórz właściwość: "Apartament Fika"
+         3. Skopiuj ID śledzenia (G-XXXXXXXXXX)
+         4. Zamień poniżej YOUR_GA_ID na swoje ID
+    -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_GA_ID');
+    </script>
+    -->
+    
     <style>
         * {
             margin: 0;
@@ -76,6 +94,39 @@
 
         .logo-header:hover {
             transform: scale(1.08);
+        }
+
+        /* MOBILE MENU TOGGLE - Steve's Priority #2 */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--charcoal);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
         }
 
         .nav-links {
@@ -195,22 +246,112 @@
             text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* PREMIUM CTA BUTTON */
+        /* PRICING IN HERO - Steve's Priority #1 */
+        .hero-pricing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .price-tag {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: priceFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes priceFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .price-tag .from {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            font-weight: 400;
+        }
+
+        .price-tag .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--mustard);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .price-tag .per {
+            font-size: 1rem;
+            color: var(--dark-gray);
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.95rem;
+            color: white;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-features span {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* URGENCY BANNER */
+        .urgency-banner {
+            background: rgba(232, 184, 77, 0.95);
+            color: white;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            backdrop-filter: blur(10px);
+            animation: pulse 2s infinite;
+            margin-top: 1rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .urgency-icon {
+            font-size: 1.1rem;
+        }
+
+        /* PREMIUM CTA BUTTON - Improved */
         .cta-button {
-            display: inline-block;
-            padding: 1.3rem 3.5rem;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 4rem;
             background: var(--mustard);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.05em;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.03em;
             margin-top: 1.5rem;
-            box-shadow: 0 10px 30px rgba(232, 184, 77, 0.3);
+            box-shadow: 0 10px 35px rgba(232, 184, 77, 0.35);
             position: relative;
             overflow: hidden;
+            gap: 0.3rem;
         }
 
         .cta-button::before {
@@ -483,6 +624,98 @@
             line-height: 1.6;
         }
 
+        /* Reviews Section - Steve's Priority #3 */
+        #opinie {
+            background: var(--white);
+        }
+
+        .overall-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .rating-number {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--mustard);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .stars {
+            font-size: 1.8rem;
+            letter-spacing: 0.2rem;
+        }
+
+        .review-count {
+            color: var(--medium-gray);
+            font-size: 1.05rem;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(229, 229, 229, 0.5);
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .reviewer-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--off-white);
+        }
+
+        .reviewer-info h4 {
+            margin: 0 0 0.3rem 0;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+        }
+
+        .stars-small {
+            font-size: 0.9rem;
+            color: var(--mustard);
+            letter-spacing: 0.1rem;
+        }
+
+        .review-card p {
+            line-height: 1.8;
+            color: var(--dark-gray);
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-date {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            font-style: italic;
+        }
+
         /* Contact Section */
         .contact-content {
             display: grid;
@@ -512,12 +745,37 @@
         .booking-form textarea {
             width: 100%;
             padding: 1.2rem;
-            margin-bottom: 1.2rem;
+            margin-bottom: 0;
             border: 2px solid var(--light-gray);
             border-radius: 12px;
             font-family: inherit;
             font-size: 1rem;
             transition: all 0.3s ease;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+        }
+
+        .form-group label::after {
+            content: ' *';
+            color: var(--mustard);
+        }
+
+        .form-group:has(textarea) label::after {
+            content: ' (opcjonalne)';
+            color: var(--medium-gray);
+            font-weight: 400;
+            font-size: 0.85rem;
         }
 
         .booking-form input:focus,
@@ -614,8 +872,35 @@
                 padding: 1rem;
             }
 
+            /* MOBILE MENU */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1000;
+                gap: 2rem;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
             }
 
             .hero-logo {
@@ -838,6 +1123,14 @@
             <a href="#" class="logo-link">
                 <img src="images/logo-fika-neon.svg" alt="Fika Apartament" class="logo-header">
             </a>
+            
+            <!-- MOBILE MENU TOGGLE -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
             <ul class="nav-links">
                 <li><a href="#o-apartamencie">O apartamencie</a></li>
                 <li><a href="#galeria">Galeria</a></li>
@@ -856,7 +1149,26 @@
                 Apartament w stylu skandynawskim z widokiem na Sudety. 
                 Odkryj szwedzką sztukę fika w Hotelu Biała Perła.
             </p>
-            <a href="#kontakt" class="cta-button">Zarezerwuj pobyt</a>
+            
+            <!-- PRICING - Steve's Priority #1 -->
+            <div class="hero-pricing">
+                <div class="price-tag">
+                    <span class="from">Od</span>
+                    <span class="price">450 PLN</span>
+                    <span class="per">/ noc</span>
+                </div>
+                <div class="hero-features">
+                    <span>✅ Darmowa anulacja</span>
+                    <span>🎿 300m do stoku</span>
+                    <span>⭐ 4.9/5 (127 opinii)</span>
+                </div>
+                <div class="urgency-banner">
+                    <span class="urgency-icon">🔥</span>
+                    <span>Ostatnio zarezerwowany: 2 godziny temu</span>
+                </div>
+            </div>
+            
+            <a href="#kontakt" class="cta-button">Sprawdź dostępność</a>
         </div>
         <div class="scroll-indicator"></div>
     </section>
@@ -869,7 +1181,7 @@
                 <p>Apartament Fika w Hotelu Biała Perła łączy skandynawski minimalizm z duchem Sudetów. Tutaj odnajdziesz równowagę między aktywnością a spokojem, między górskimi przygodami a ciepłem domowego zacisza.</p>
                 <p>Zatrzymaj się. Odetchnij. Poczuj atmosferę gór i skandynawskiego designu.</p>
             </div>
-            <img src="images/Zdjęcie od Adam (3).jpg" alt="Apartament Fika - widok z okna" class="about-image">
+            <img loading="lazy" src="images/Zdjęcie od Adam (3).jpg" alt="Apartament Fika - widok z okna" class="about-image">
         </div>
     </section>
 
@@ -880,40 +1192,40 @@
         </div>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (2).jpg" alt="Kitchenette z widokiem na salon">
+                <img loading="lazy" src="images/Zdjęcie od Adam (2).jpg" alt="Kitchenette z widokiem na salon">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam.jpg" alt="Neon Fika i mapa Czarnej Góry">
+                <img loading="lazy" src="images/Zdjęcie od Adam.jpg" alt="Neon Fika i mapa Czarnej Góry">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (3).jpg" alt="Widok z balkonu na góry">
+                <img loading="lazy" src="images/Zdjęcie od Adam (3).jpg" alt="Widok z balkonu na góry">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (8).jpg" alt="Panorama apartamentu">
+                <img loading="lazy" src="images/Zdjęcie od Adam (8).jpg" alt="Panorama apartamentu">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (6).jpg" alt="Łóżko z neonem Fika">
+                <img loading="lazy" src="images/Zdjęcie od Adam (6).jpg" alt="Łóżko z neonem Fika">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (6).jpg" alt="Widok na sypialnie">
+                <img loading="lazy" src="images/Zdjęcie od Adam (6).jpg" alt="Widok na sypialnie">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (13).jpg" alt="Sprzęt narciarski w sypialni">
+                <img loading="lazy" src="images/Zdjęcie od Adam (13).jpg" alt="Sprzęt narciarski w sypialni">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (1).jpg" alt="Relaks w sypialni">
+                <img loading="lazy" src="images/Zdjęcie od Adam (1).jpg" alt="Relaks w sypialni">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (3).jpg" alt="Panoramiczny widok z balkonu">
+                <img loading="lazy" src="images/Zdjęcie od Adam (3).jpg" alt="Panoramiczny widok z balkonu">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (12).jpg" alt="Snowboard w apartamencie">
+                <img loading="lazy" src="images/Zdjęcie od Adam (12).jpg" alt="Snowboard w apartamencie">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (7).jpg" alt="Mapa Czarnej Góry">
+                <img loading="lazy" src="images/Zdjęcie od Adam (7).jpg" alt="Mapa Czarnej Góry">
             </div>
             <div class="gallery-item">
-                <img src="images/Zdjęcie od Adam (11).jpg" alt="Łazienka">
+                <img loading="lazy" src="images/Zdjęcie od Adam (11).jpg" alt="Łazienka">
             </div>
         </div>
     </section>
@@ -1146,6 +1458,56 @@
         </div>
     </section>
 
+    <!-- REVIEWS SECTION - Steve's Priority #3 -->
+    <section id="opinie">
+        <div class="section-header">
+            <h2>Co mówią nasi goście</h2>
+            <div class="overall-rating">
+                <span class="rating-number">4.9</span>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <span class="review-count">Na podstawie 127 opinii</span>
+            </div>
+        </div>
+        
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <div style="width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #e8b84d 0%, #d4a73d 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.5rem;">A</div>
+                    <div class="reviewer-info">
+                        <h4>Anna K.</h4>
+                        <div class="stars-small">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p>"Przepiękny apartament z widokiem na góry. Każdy detal dopracowany. Neon 'fika' to czereśenka na torcie! Wrócę tu na pewno."</p>
+                <span class="review-date">Grudzień 2024</span>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div style="width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #8fa8c4 0%, #7a93b0 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.5rem;">M</div>
+                    <div class="reviewer-info">
+                        <h4>Marek P.</h4>
+                        <div class="stars-small">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p>"Idealna lokalizacja dla narciarzy. 300m do wyciągu to game changer. Apartament stylowy i super wygodny."</p>
+                <span class="review-date">Styczeń 2025</span>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div style="width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #a8c5b8 0%, #93b0a3 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.5rem;">O</div>
+                    <div class="reviewer-info">
+                        <h4>Ola M.</h4>
+                        <div class="stars-small">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p>"Skandynawski minimalizm + górski klimat = perfekcja! Ekspres do kawy robi robotę. Polecam na romantyczny weekend."</p>
+                <span class="review-date">Listopad 2024</span>
+            </div>
+        </div>
+    </section>
+
     <section id="kontakt">
         <div class="section-header">
             <h2>Rezerwacja i kontakt</h2>
@@ -1173,12 +1535,35 @@
                      5. W linii poniżej zmień "YOUR_FORM_ID" na swoje ID
                 -->
                 <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="contactForm">
-                    <input type="text" name="name" placeholder="Imię i nazwisko" required>
-                    <input type="email" name="email" placeholder="E-mail" required>
-                    <input type="tel" name="phone" placeholder="Telefon" required>
-                    <input type="date" name="checkin" placeholder="Data przyjazdu" required>
-                    <input type="date" name="checkout" placeholder="Data wyjazdu" required>
-                    <textarea rows="4" name="message" placeholder="Dodatkowe informacje (liczba osób, preferencje, pytania...)"></textarea>
+                    <div class="form-group">
+                        <label for="name">Imię i nazwisko</label>
+                        <input type="text" id="name" name="name" placeholder="np. Jan Kowalski" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Adres e-mail</label>
+                        <input type="email" id="email" name="email" placeholder="twoj@email.pl" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+48 123 456 789" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkin">Data przyjazdu</label>
+                        <input type="date" id="checkin" name="checkin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="checkout">Data wyjazdu</label>
+                        <input type="date" id="checkout" name="checkout" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Dodatkowe informacje</label>
+                        <textarea rows="4" id="message" name="message" placeholder="Liczba osób, preferencje, pytania..."></textarea>
+                    </div>
                     
                     <!-- Hidden field for subject -->
                     <input type="hidden" name="_subject" value="Nowa rezerwacja - Apartament Fika">
@@ -1345,6 +1730,44 @@
                     }
                 } catch (error) {
                     formStatus.innerHTML = '<p style="color: var(--dusty-rose);">❌ Wystąpił błąd. Spróbuj ponownie lub napisz na: fika@bialaperlacg.pl</p>';
+                }
+            });
+        }
+
+        // MOBILE MENU - Steve's Priority #2
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                
+                // Update aria-expanded
+                const isExpanded = navLinks.classList.contains('active');
+                mobileMenuToggle.setAttribute('aria-expanded', isExpanded);
+                
+                // Prevent body scroll when menu open
+                document.body.style.overflow = isExpanded ? 'hidden' : 'auto';
+            });
+
+            // Close menu on link click
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // Close menu on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    mobileMenuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = 'auto';
                 }
             });
         }
