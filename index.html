@@ -412,21 +412,58 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
-        /* HANDWRITTEN ICON STYLE */
+        /* CALLIGRAPHIC INK PEN ICONS - SVG Style */
         .amenity-icon {
-            font-family: 'Caveat', cursive;
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            color: var(--mustard);
-            font-weight: 700;
-            display: inline-block;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             animation: iconFloat 3s ease-in-out infinite;
-            text-shadow: 2px 2px 4px rgba(232, 184, 77, 0.2);
+            position: relative;
+        }
+
+        .amenity-icon svg {
+            width: 60px;
+            height: 60px;
+            color: var(--charcoal);
+            opacity: 0.75;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+        }
+
+        .amenity:hover .amenity-icon svg {
+            opacity: 1;
+            transform: scale(1.08);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+        }
+
+        /* Subtle hand-drawn circle behind icon */
+        .amenity-icon::before {
+            content: '';
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            border: 1.5px solid var(--charcoal);
+            border-radius: 50%;
+            opacity: 0.15;
+            transform: rotate(-5deg);
+            transition: all 0.4s ease;
+        }
+
+        .amenity:hover .amenity-icon::before {
+            opacity: 0.25;
+            transform: rotate(5deg) scale(1.05);
         }
 
         @keyframes iconFloat {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .amenity:hover .amenity-icon {
+            animation: iconFloat 1.5s ease-in-out infinite;
         }
 
         .amenity h4 {
@@ -659,9 +696,139 @@
             0% { opacity: 1; top: 10px; }
             100% { opacity: 0; top: 30px; }
         }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10001;
+            font-weight: 300;
+        }
+
+        .lightbox-close:hover {
+            color: var(--mustard);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 80%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            user-select: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: rgba(232, 184, 77, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 40px;
+        }
+
+        .lightbox-next {
+            right: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item::before {
+            content: '🔍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 3rem;
+            color: white;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
+    <!-- Lightbox for Gallery -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption"></div>
+        <a class="lightbox-prev">&#10094;</a>
+        <a class="lightbox-next">&#10095;</a>
+    </div>
+
     <header>
         <nav>
             <a href="#" class="logo-link">
@@ -783,42 +950,100 @@
         </div>
         <div class="amenities-grid">
             <div class="amenity">
-                <div class="amenity-icon">☕</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 45 Q15 35, 20 30 L20 15 Q20 10, 25 10 L35 10 Q40 10, 40 15 L40 30 Q45 35, 45 45" 
+                              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M12 45 L48 45" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M22 20 L38 20" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M22 25 L38 25" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                    </svg>
+                </div>
                 <h4>Ekspres do kawy</h4>
                 <p>Prawdziwa fika zaczyna się od dobrej kawy</p>
             </div>
             <div class="amenity">
-                <div class="amenity-icon">🏔</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 40 L20 20 L30 35 L40 15 L50 40" 
+                              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 40 L50 40" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="30" cy="12" r="3" stroke="currentColor" stroke-width="1" fill="none"/>
+                    </svg>
+                </div>
                 <h4>Widok na góry</h4>
                 <p>Panoramiczne okna z widokiem na Sudety</p>
             </div>
             <div class="amenity">
-                <div class="amenity-icon">📶</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="18" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M30 15 L30 30 L40 35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M15 20 Q12 22, 10 25" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M45 20 Q48 22, 50 25" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M15 40 Q12 38, 10 35" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                    </svg>
+                </div>
                 <h4>Szybki WiFi</h4>
                 <p>Bezpłatny internet w całym apartamencie</p>
             </div>
             <div class="amenity">
-                <div class="amenity-icon">🍳</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="25" width="30" height="20" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="30" cy="35" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M22 35 L38 35" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                        <path d="M20 15 L40 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
                 <h4>Aneks kuchenny</h4>
                 <p>W pełni wyposażona kitchenette</p>
             </div>
             <div class="amenity">
-                <div class="amenity-icon">🏢</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 30 L10 45 L50 45 L50 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M5 30 L30 10 L55 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="25" y="35" width="10" height="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </div>
                 <h4>Balkon</h4>
                 <p>Prywatny taras z leżakami</p>
             </div>
             <div class="amenity">
-                <div class="amenity-icon">🅿</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="15" y="20" width="30" height="25" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="22" cy="35" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="38" cy="35" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M30 15 L30 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="30" cy="12" r="2" stroke="currentColor" stroke-width="1" fill="currentColor"/>
+                    </svg>
+                </div>
                 <h4>Parking</h4>
                 <p>Bezpłatny parking dla gości</p>
             </div>
             <div class="amenity">
-                <div class="amenity-icon">🎿</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 45 L30 15 L45 45" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 35 L40 35" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                        <circle cx="30" cy="20" r="2" stroke="currentColor" stroke-width="1" fill="currentColor"/>
+                    </svg>
+                </div>
                 <h4>Przechowalnia sprzętu</h4>
                 <p>Miejsce na narty i rowery</p>
             </div>
             <div class="amenity">
-                <div class="amenity-icon">🛁</div>
+                <div class="amenity-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 25 Q15 20, 20 20 L40 20 Q45 20, 45 25 L45 40 Q45 45, 40 45 L20 45 Q15 45, 15 40 Z" 
+                              stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="25" cy="30" r="2" stroke="currentColor" stroke-width="1" fill="none"/>
+                        <circle cx="35" cy="30" r="2" stroke="currentColor" stroke-width="1" fill="none"/>
+                        <path d="M20 35 Q30 38, 40 35" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+                    </svg>
+                </div>
                 <h4>Nowoczesna łazienka</h4>
                 <p>Z prysznicem i kosmetykami</p>
             </div>
@@ -900,6 +1125,15 @@
         </div>
     </footer>
 
+    <!-- Lightbox for Gallery -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption"></div>
+        <a class="lightbox-prev">&#10094;</a>
+        <a class="lightbox-next">&#10095;</a>
+    </div>
+
     <script>
         // Smooth scroll indicator hide on scroll
         window.addEventListener('scroll', () => {
@@ -912,6 +1146,65 @@
             } else {
                 header.classList.remove('scrolled');
                 if (scrollIndicator) scrollIndicator.style.opacity = '1';
+            }
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.querySelector('.lightbox-caption');
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        let currentImageIndex = 0;
+
+        // Open lightbox
+        galleryItems.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+                lightboxCaption.textContent = img.alt;
+                currentImageIndex = index;
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close lightbox
+        document.querySelector('.lightbox-close').addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close on background click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Navigate images
+        document.querySelector('.lightbox-prev').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentImageIndex].src;
+            lightboxCaption.textContent = galleryItems[currentImageIndex].alt;
+        });
+
+        document.querySelector('.lightbox-next').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+            lightboxImg.src = galleryItems[currentImageIndex].src;
+            lightboxCaption.textContent = galleryItems[currentImageIndex].alt;
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                } else if (e.key === 'ArrowLeft') {
+                    document.querySelector('.lightbox-prev').click();
+                } else if (e.key === 'ArrowRight') {
+                    document.querySelector('.lightbox-next').click();
+                }
             }
         });
     </script>
