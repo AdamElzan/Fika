@@ -1,0 +1,105 @@
+<svg width="400" height="150" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Neon glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="glow-strong">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Neon "fika" in cursive handwritten style -->
+  <path d="
+    M 60 80
+    Q 50 50, 65 40
+    Q 75 35, 80 45
+    L 85 70
+    
+    M 95 50
+    L 95 85
+    
+    M 95 50
+    L 110 50
+    
+    M 120 85
+    L 120 50
+    Q 120 45, 125 42
+    Q 135 38, 145 45
+    L 155 75
+    Q 158 85, 148 88
+    Q 138 90, 130 82
+    
+    M 168 50
+    Q 168 45, 173 42
+    Q 183 38, 193 45
+    L 203 75
+    Q 206 85, 196 88
+    Q 186 90, 178 82
+    L 178 65
+    Q 178 60, 185 58
+    Q 195 56, 203 63
+  "
+  fill="none"
+  stroke="#ffffff"
+  stroke-width="6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  filter="url(#glow-strong)"
+  opacity="0.95"/>
+  
+  <!-- More authentic cursive "fika" - handwritten style like the neon -->
+  <g filter="url(#glow)">
+    <!-- f -->
+    <path d="M 45 75 Q 45 45, 58 38 Q 68 33, 75 42 L 78 65 L 75 85" 
+          fill="none" stroke="#fef3c7" stroke-width="5" stroke-linecap="round"/>
+    <line x1="65" y1="55" x2="85" y2="55" 
+          stroke="#fef3c7" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- i -->
+    <line x1="100" y1="55" x2="100" y2="85" 
+          stroke="#fef3c7" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="100" cy="45" r="3" fill="#fef3c7"/>
+    
+    <!-- k -->
+    <line x1="120" y1="35" x2="120" y2="88" 
+          stroke="#fef3c7" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 135 58 L 122 68 L 140 85" 
+          fill="none" stroke="#fef3c7" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- a -->
+    <path d="M 158 68 Q 158 58, 168 56 Q 178 55, 185 62 Q 190 68, 188 76 Q 186 84, 178 86 Q 168 88, 162 82" 
+          fill="none" stroke="#fef3c7" stroke-width="5" stroke-linecap="round"/>
+    <line x1="185" y1="62" x2="188" y2="86" 
+          stroke="#fef3c7" stroke-width="4.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Extra glow layer for authenticity -->
+  <path d="M 45 75 Q 45 45, 58 38 Q 68 33, 75 42 L 78 65 L 75 85
+           M 65 55 L 85 55
+           M 100 55 L 100 85
+           M 100 45 L 100 46
+           M 120 35 L 120 88
+           M 135 58 L 122 68 L 140 85
+           M 158 68 Q 158 58, 168 56 Q 178 55, 185 62 Q 190 68, 188 76 Q 186 84, 178 86 Q 168 88, 162 82
+           M 185 62 L 188 86" 
+        fill="none" 
+        stroke="#fffbeb" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        opacity="0.6"
+        filter="url(#glow)"/>
+</svg>
